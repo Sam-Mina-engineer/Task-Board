@@ -55,16 +55,50 @@ function renderTaskList() {
     }
   });
 
-
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
 
+  event.preventDefault();
+
+  const title = $("#taskTitle").val();
+  const description = $("#taskDescription").val();
+  const dueDate = $("#taskDueDate").val();
+
+  if (!title || !description || !dueDate) {
+    alert("All fields are required!");
+    return;
+  }
+
+  const newTask = {
+    id: generateTaskId(),
+    title,
+    description,
+    dueDate,
+    status: "to-do"
+  };
+
+  taskList.push(newTask);
+  localStorage.setItem("tasks", JSON.stringify(taskList));
+  localStorage.setItem("nextId", JSON.stringify(nextId));
+
+  $("#formModal").modal('hide');
+  renderTaskList();
+
 }
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+
+  const taskId = $(event.target).closest(".card").data("id");
+  taskList = taskList.filter(task => task.id !== taskId);
+
+  localStorage.setItem("tasks", JSON.stringify(taskList));
+  renderTaskList();
+
+
+
 
 }
 
