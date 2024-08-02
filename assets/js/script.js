@@ -1,6 +1,15 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
+if (!Array.isArray(taskList)) {
+  taskList = [];
+}
 let nextId = JSON.parse(localStorage.getItem("nextId"));
+if (typeof nextId !== "number") {
+  nextId = 1;
+}
+
+console.log("Initialized taskList:", taskList);
+console.log("Initialized nextId:", nextId);
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
@@ -80,6 +89,7 @@ function handleAddTask(event){
   };
 
   taskList.push(newTask);
+  console.log("Task List:", taskList); //Added console log to see why form not working.
   localStorage.setItem("tasks", JSON.stringify(taskList));
   localStorage.setItem("nextId", JSON.stringify(nextId));
 
@@ -124,7 +134,7 @@ $(document).ready(function () {
   $("#taskForm").on("submit", handleAddTask);
   $(document).on("click", ".delete-task", handleDeleteTask);
 
-  $(".lane .card-body").droppable({
+  $(".lane").droppable({
     accept: ".card",
     drop: handleDrop
   });
