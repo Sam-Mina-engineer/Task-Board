@@ -23,3 +23,6 @@ Time for another GIT PUSH!!!
 For the function that handles dropping a task into a new status lane I use const taskID to get the ID of the task that is going to be dragged. I then use JQuery UI. The draggable object gets the data id attribute from the dragged element. Then I use const newStatus to determine the new status lane into which the task was placed. Then I update the task's status. I use an arrow function for this to do a strict equal === task.id to taskId, then task.status = newStatus.
 Then JSON stringify to update the task list to localStorage. And then render. 
 For the last function makes sure that the task list is rendered and it uses event listeners for the form submission and for deleting tasks. It also uses JQuery UI to ake the task lanes droppable and to let tasks be moved between lanes. It also has the date picker on the due date input field. Time for a git push. 
+![Image Description](screenshot-1.png)
+![Image Description](screenshot-2.png)
+![Image Description](screenshot-3.png)
